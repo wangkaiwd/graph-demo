@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { hasCycle } from "../checkCycle";
+import { isCyclic } from "../isCyclic";
 
-describe("hasCycle", () => {
+describe("isCyclic", () => {
   it("should return false when graph has not cycle", () => {
     const workflow = {
       nodes: [
@@ -19,7 +19,7 @@ describe("hasCycle", () => {
         { source: "summary", target: "end" },
       ],
     };
-    expect(hasCycle(workflow)).toBe(true);
+    expect(isCyclic(workflow)).toBe(false);
   });
   it("should return true when graph has cycle", () => {
     const workflow = {
@@ -39,5 +39,23 @@ describe("hasCycle", () => {
         { source: "summary", target: "llm1" },
       ],
     };
+    expect(isCyclic(workflow)).toBe(true);
+  });
+  it("unconnected graph", () => {
+    const workflow = {
+      nodes: [
+        { id: "start" },
+        { id: "llm1" },
+        { id: "llm2" },
+        { id: "summary" },
+        { id: "end" },
+      ],
+      edges: [
+        { source: "start", target: "llm1" },
+        { source: "llm2", target: "summary" },
+        { source: "summary", target: "end" },
+      ],
+    };
+    expect(isCyclic(workflow)).toBe(false);
   });
 });

@@ -1,6 +1,10 @@
 ## 环检测
 
+https://www.geeksforgeeks.org/dsa/detect-cycle-in-a-graph/
+
 ### 思路
+
+保证所有节点的邻接节点都不会形成环
 
 ### FAQ
 
@@ -54,3 +58,15 @@ graph TD
 ```
 
 没有 `visited` ，D 节点会被重复访问
+
+#### 3. 为什么要删除 `recStack` 中的节点
+
+`D` 节点如果不删除，第二轮遍历时还会碰到，会误以为是环
+
+```mermaid
+graph TD
+    A --> B
+    A --> C
+    B --> D
+    C --> D
+```
