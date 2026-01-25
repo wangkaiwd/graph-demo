@@ -1,5 +1,7 @@
 export interface TNode {
   id: string;
+  type?: string; // e.g., 'start', 'end', 'task', 'loop'
+  subWorkflow?: WorkFlow; // for loop nodes
   [key: string]: any;
 }
 
