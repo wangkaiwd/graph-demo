@@ -57,11 +57,11 @@ graph TD
     style D fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
-没有 `visited` ，D 节点会被重复访问
+没有 `visited`，D 节点会被重复访问
 
-#### 3. 为什么要删除 `recStack` 中的节点
+#### 3. 为什么要删除 `recStack` 中的节点？
 
-`D` 节点如果不删除，第二轮遍历时还会碰到，会误以为是环
+`D` 节点如果不删除，第二轮遍历时还会碰到，会误认为是环
 
 ```mermaid
 graph TD

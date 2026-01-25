@@ -1,20 +1,44 @@
-// https://www.geeksforgeeks.org/dsa/detect-cycle-in-a-graph/
+import { TNode, WorkFlow } from "./types";
+import { buildGraph } from "./utils";
 
-const workflow1 = {
-  nodes: [
-    { id: "start" },
-    { id: "llm1" },
-    { id: "llm2" },
-    { id: "summary" },
-    { id: "end" },
-  ],
-  edges: [
-    { source: "start", target: "llm1" },
-    { source: "start", target: "llm2" },
-    { source: "llm1", target: "summary" },
-    { source: "llm2", target: "summary" },
-    { source: "summary", target: "end" },
-  ],
+export const topologicalSortBfs = (workflow: WorkFlow) => {
+  const { adjacencyList, inDegrees, nodeMap } = buildGraph(workflow);
+  const queue: TNode[] = [];
+  const result: TNode[] = [];
+  // https://stackoverflow.com/a/36392307/11720536
+  // shallow clone
+  const inDegreesClone = new Map(inDegrees);
+
+  const enqueueZeroInDegreeNode = () => {
+    // 入队所有入度为0的节点
+    inDegreesClone.forEach((degree, id) => {
+      if (degree === 0) {
+        const node = nodeMap.get(id);
+        if (node) {
+          queue.push(node);
+        }
+      }
+    });
+  };
+  enqueueZeroInDegreeNode();
+
+  // 处理所有的邻接节点
+  while (queue.length) {
+    const node = queue.shift()!;
+    result.push(node);
+    const successors = adjacencyList.get(node.id);
+    if (successors) {
+      for (let i = 0; i < successors.length; i++) {
+        const successor = successors[i];
+        let inDegreeClone = inDegreesClone.get(successor.id)!;
+        inDegreeClone--;
+        inDegreesClone.set(successor.id, inDegreeClone);
+        if (inDegreeClone === 0) {
+          queue.push(successor);
+        }
+      }
+    }
+  }
+
+  return result;
 };
-
-const hasCycle = () => {};

@@ -1,9 +1,9 @@
 import { TNode, WorkFlow } from "./types";
-import { createAdjacencyList } from "./utils";
+import { buildGraph } from "./utils";
 
 export const isCyclic = (workflow: WorkFlow) => {
   const { nodes } = workflow;
-  const adjacencyList = createAdjacencyList(workflow);
+  const { adjacencyList } = buildGraph(workflow);
   const visited = new Map();
   const recursionStack = new Map();
 
