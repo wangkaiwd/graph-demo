@@ -32,7 +32,7 @@ export const isCyclic = (workflow: WorkFlow) => {
     return false;
   };
 
-  // 每个节点都要遍历，保证所有的连现都没有环：
+  // 每个节点都要遍历，保证所有的连接都没有环：
   // 非连通图（思考俩个示例）
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];

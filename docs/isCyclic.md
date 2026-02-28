@@ -1,6 +1,6 @@
 ## 环检测
 
-https://www.geeksforgeeks.org/dsa/detect-cycle-in-a-graph/
+参考：[javascript-algorithms/detect-cycle](https://github.com/trekhleb/javascript-algorithms/tree/master/src/algorithms/graph/detect-cycle)
 
 ### 思路
 
@@ -70,3 +70,7 @@ graph TD
     B --> D
     C --> D
 ```
+
+第二轮 DFS 时（从节点 C 开始），如果 D 仍在 `recStack` 中，会误认为存在环。但实际上 D → C 的边并不存在，只是因为第一轮 DFS 时 D 被加入过 `recStack`。
+
+因此，节点完成遍历后需要从 `recStack` 中移除，确保不同 DFS 路径之间互不影响。

@@ -1,5 +1,8 @@
 ## 拓扑排序
 
+* https://www.youtube.com/watch?v=ddTC4Zovtbc&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8
+* https://www.geeksforgeeks.org/dsa/topological-sorting-indegree-based-solution/
+
 ### 思路
 
 dfs
